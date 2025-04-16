@@ -261,7 +261,7 @@ const main = async () => {
           { name: 'POST', value: 'POST' },
           { name: 'PUT', value: 'PUT' },
           { name: 'PATCH', value: 'PATCH' },
-          { name: 'Delete', value: 'DELETE' }
+          { name: 'DELETE', value: 'DELETE' }
         ],
         default: 'GET',
         message: 'Select a API Method'
@@ -269,7 +269,8 @@ const main = async () => {
 
       const apiName = await input({
         message:
-          'Put filename path that you want to save the contract API eg. "flight"'
+          'Put filename path that you want to save the contract API eg. "flight"',
+        validate: (value) => Boolean(value)
       });
 
       const filePath = await input({
