@@ -1,5 +1,6 @@
 # 📦 json-to-interface
 
+[![npm version](https://badge.fury.io/js/@darth_sith_99%2Fjson-to-interface.svg)](https://badge.fury.io/js/@darth_sith_99%2Fjson-to-interface)<br><br>
 **`@darth_sith_99/json-to-interface`** is a simple CLI tool that lets you generate TypeScript interfaces directly from a JSON payload. It’s perfect for quickly scaffolding data contracts for your frontend or backend project.
 
 ## ✨ Features
