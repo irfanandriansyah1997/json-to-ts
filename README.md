@@ -1,6 +1,6 @@
 # 📦 json-to-interface
 
-**`json-to-interface`** is a simple CLI tool that lets you generate TypeScript interfaces directly from a JSON payload. It’s perfect for quickly scaffolding data contracts for your frontend or backend project.
+**`@darth_sith_99/json-to-interface`** is a simple CLI tool that lets you generate TypeScript interfaces directly from a JSON payload. It’s perfect for quickly scaffolding data contracts for your frontend or backend project.
 
 ## ✨ Features
 
@@ -26,7 +26,7 @@ You can generate a TypeScript interface by piping or pasting your JSON payload w
 ### Run via CLI
 
 ```bash
-npx json-to-interface
+npx @darth_sith_99/json-to-interface
 ```
 
 #### Then, follow the prompt:

@@ -1,10 +1,13 @@
 {
-  "name": "json-to-interface",
+  "name": "@darth_sith_99/json-to-interface",
   "version": "1.0.0",
   "description": "",
   "bin": {
     "json-to-ts": "./index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint",
     "build": "pnpm build:dec && pnpm build:ts",
