@@ -38,7 +38,7 @@ const createdContractContent = async (
     if (typeof result === 'object') {
       return new Promise<string | undefined>((resolve, reject) => {
         exec(
-          `echo '${JSON.stringify(result)}' | npx quicktype --lang ts --just-types --all-properties-optional  --no-date-times --top-level Root`,
+          `echo '${JSON.stringify(result)}' | npx quicktype@23.0.0 --lang ts --just-types --all-properties-optional  --no-date-times --top-level Root`,
           (stdErr, generatedContract) => {
             if (stdErr && stdErr instanceof Error) {
               // Syntax error in input JSON
@@ -227,7 +227,10 @@ const createContractFile = async (
     fs.writeFileSync(generatedFilePath, content.join('\n'));
     console.log(`✅ Success create contract interface file "${fileName}".`);
     return true;
-  } catch {
+  } catch (e) {
+    if (e instanceof Error) console.log(e.message);
+    else console.log(e);
+
     return false;
   }
 };
@@ -291,7 +294,7 @@ const main = async () => {
         validate: (value) => value.endsWith('.json')
       });
 
-      const result = createContractFile({
+      const result = await createContractFile({
         apiMethod,
         apiName,
         failureFileMock: errorMock,

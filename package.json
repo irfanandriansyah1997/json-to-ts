@@ -1,9 +1,9 @@
 {
   "name": "@darth_sith_99/json-to-interface",
-  "version": "1.0.1",
+  "version": "1.4.0",
   "description": "",
   "bin": {
-    "json-to-ts": "./index.js"
+    "json-to-ts": "index.js"
   },
   "files": [
     "dist"

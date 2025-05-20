@@ -2,6 +2,7 @@
   "extends": "@cashbound-id/compiler/tsconfig.json",
   "compilerOptions": {
     "emitDeclarationOnly": false,
+    "importHelpers": false,
     "declaration": false,
     "outDir": "./dist",
     "paths": {

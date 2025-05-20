@@ -138,7 +138,7 @@ export default {
     }
 
     // Mark all node_modules external except the ones you want to include
-    const keepBundled = ['@inquirer/input', '@inquirer/core', '@inquirer/figures', '@inquirer/select'];
+    const keepBundled = ['@inquirer/input', '@inquirer/core', '@inquirer/figures', '@inquirer/select', 'tslib'];
     if (keepBundled.some(pkg => id === pkg || id.includes(`${pkg}/`))) {
       return false;
     }
