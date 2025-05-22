@@ -38,7 +38,7 @@ const createdContractContent = async (
     if (typeof result === 'object') {
       return new Promise<string | undefined>((resolve, reject) => {
         exec(
-          `echo '${JSON.stringify(result)}' | npx quicktype@23.0.0 --lang ts --just-types --all-properties-optional  --no-date-times --top-level Root`,
+          `echo '${JSON.stringify(result)}' | npx quicktype@23.0.0 --lang ts --just-types --prefer-unions --all-properties-optional  --no-date-times --top-level Root`,
           (stdErr, generatedContract) => {
             if (stdErr && stdErr instanceof Error) {
               // Syntax error in input JSON
