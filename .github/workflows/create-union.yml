@@ -1,0 +1,59 @@
+name: Create union branch
+
+on:
+  workflow_dispatch: # 👈 Manual trigger only
+
+permissions:
+  contents: write # ✅ Needed to push a new branch
+
+jobs:
+  create-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # fetch all tags
+
+      - name: Find latest tag (exclude tags with dash)
+        id: get_latest_tag
+        run: |
+          git fetch --tags
+
+          # Get all tags excluding ones containing '-'
+          tags=$(git tag --sort=-creatordate | grep -v '-')
+
+          if [ -z "$tags" ]; then
+            echo "❌ No tags found without dash"
+            exit 1
+          fi
+
+          latest_tag=$(echo "$tags" | head -n 1)
+          echo "✅ Latest clean tag: $latest_tag"
+
+          # Remove leading 'v' if present
+          clean_tag=$(echo "$latest_tag" | sed 's/^v//')
+          echo "🧹 Clean tag (no v): $clean_tag"
+
+          echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
+          echo "clean_tag=$clean_tag" >> $GITHUB_OUTPUT
+
+      - name: Create new branch from latest tag
+        run: |
+          latest_tag=${{ steps.get_latest_tag.outputs.latest_tag }}
+          clean_tag=${{ steps.get_latest_tag.outputs.clean_tag }}
+          new_branch="union/from-${clean_tag}"
+
+          echo "ℹ️ Creating new branch: $new_branch"
+
+          # Remove branch if exists
+          git show-ref --verify --quiet refs/heads/$new_branch && git branch -D $new_branch || true
+
+          # Create branch from tag
+          git checkout -b $new_branch $latest_tag
+
+          # Push branch to origin
+          git push origin $new_branch -f
+
+          echo "✅ Successfully created and pushed branch '$new_branch'"
