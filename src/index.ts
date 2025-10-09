@@ -74,6 +74,15 @@ const createdContractContent = async (
               }
             }
 
+            for (const match of generatedContract.matchAll(
+              /export type\s+(\w+)/g
+            )) {
+              const [, keyword] = match;
+              if (typeof keyword === 'string' && keyword) {
+                exposedName.add(keyword.replace('export type ', ''));
+              }
+            }
+
             /**
              * INFO: remove all export keep only first export keyword
              */
@@ -88,6 +97,13 @@ const createdContractContent = async (
                 }
 
                 return `interface`;
+              }
+            );
+
+            formattedGeneratedContract = formattedGeneratedContract.replace(
+              /export type/g,
+              () => {
+                return `type`;
               }
             );
 
